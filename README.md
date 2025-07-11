@@ -1,4 +1,4 @@
-# **Key features**
+# **Key application features**
 
 ## User stories
 
