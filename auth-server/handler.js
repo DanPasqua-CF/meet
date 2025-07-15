@@ -30,7 +30,7 @@ module.exports.getAuthURL = async () => {
   };
 };
 
-module.exports.getAccessToken = async () => {
+module.exports.getAccessToken = async (event) => {
   const code = decodeURIComponent(`${event.pathParameters.code}`);
 
   return new Promise((resolve, reject) => {
