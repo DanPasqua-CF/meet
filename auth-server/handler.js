@@ -1,11 +1,9 @@
 'use strict';
 
 const { google } = require('googleapis');
-
 const calendar = google.calendar({ version: "v3" });
 const SCOPES = ["https://www.googleapis.com/auth/calendar.events.public.readonly"];
 const { CALENDAR_ID, CLIENT_ID, CLIENT_SECRET } = process.env;
-
 const redirect_uris = [
   "https://meet-dgdmf59xb-dans-projects-4b9e2996.vercel.app/"
 ];
@@ -96,7 +94,7 @@ module.exports.getCalendarEvents = async () => {
   .catch((error) => {
     return {
       statusCode: 500,
-      body: JSON.stringify(error);
+      body: JSON.stringify(error)
     }
   });
 }
