@@ -18,7 +18,7 @@ jobs:
           node-version: 18
 
       - name: Install Serverless Framework CLI
-        run: npm install -g serverless
+        run: npm install -g serverless@3
 
       - name: Change to auth-server directory
         working-directory: ./auth-server
