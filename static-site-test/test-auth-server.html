@@ -43,21 +43,32 @@
     <script type="text/javascript">
       /* -------------------- STEP 1 -------------------- */
       const getAuthUrlButton = document.getElementById("getAuthUrlButton");
-      const result = document.getElementById("result");
+      const resultElement = document.getElementById("result");
       const resultLink = document.getElementById("authURL");
       const getAuthURL = "https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url"
 
       getAuthUrlButton.onclick = function() {
         fetch(getAuthURL)
           .then(function (response) {
+            console.log("Response", response);
             return response.json();
           })
           .then(function (json) {
-            const result = JSON.stringify(json);
-            const { authURL } = JSON.parse(result);
+            console.log("API response:", json);
+            const authURL = json.authUrl;
 
-            resultElement.innerText = result;
+            if (!authURL) {
+              throw new Error("authURL not found in response.");
+            }
+
+            resultElement.innerText = JSON.stringify(json, null, 2);
             resultLink.href = authURL;
+          })
+          .catch((error) => {
+            console.error(`Error:`, error);
+            resultElement.innerText = `Error fetching auth URL: ${error.message}`;
+            resultLink.href = "#";
+            resultLink.textContent = "";
           });
       };
 
@@ -65,7 +76,7 @@
       const codeValue = document.getElementById("code");
       const getAccessToken = document.getElementById("getToken");
       const accessTokenElement = document.getElementById("accessToken");
-      const getToken = "YOUR_LAMBDA_GET_TOKEN_ENDPOINT";
+      const getToken = "https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/token";
 
       getAccessToken.onclick = function () {
         let code = codeValue.value;
@@ -86,7 +97,7 @@
     /* -------------------- STEP 3 -------------------- */
     const getEvents = document.getElementById("getEvents");
     const events = document.getElementById("events");
-    const getCalendarEvents = "YOUR_LAMBDA_GET_CALENDAR_EVENTS_ENDPOINT";
+    const getCalendarEvents = "https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-events";
 
     getEvents.onclick = function () {
       const { access_token } = JSON.parse(accessTokenElement.innerText);
@@ -98,7 +109,8 @@
         .then(function (json) {
           events.innerText = JSON.stringify(json, null, 2);
         });
-    }; 
+    };
+
     </script>
   </body>
 </html>
