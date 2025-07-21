@@ -22,7 +22,9 @@ jobs:
 
       - name: Change to auth-server directory
         working-directory: ./auth-server
-        run: echo "In auth-server directory"
+        run: |
+          pwd
+          ls -la
 
       - name: Install dependencies
         working-directory: ./auth-server
