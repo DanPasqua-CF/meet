@@ -1,6 +1,8 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: danpasquacf
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: meet
 service: auth-server
-
-frameworkVersion: ">=3.0.0"
 
 provider:
   name: aws
