@@ -59,7 +59,7 @@ module.exports.getAccessToken = async (event) => {
   });
 }
 
-module.exports.getCalendarEvents = async () => {
+module.exports.getCalendarEvents = async (event) => {
   const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
 
   oAuth2Client.setCredentials({ access_token });
@@ -72,6 +72,7 @@ module.exports.getCalendarEvents = async () => {
         timeMin: new Date().toISOString(),
         singleEvents: true,
         orderBy: "startTime",
+        maxResults: 2
       },
       (error, response) => {
         if (error) {
@@ -94,7 +95,14 @@ module.exports.getCalendarEvents = async () => {
   .catch((error) => {
     return {
       statusCode: 500,
-      body: JSON.stringify(error)
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true
+      },
+      body: JSON.stringify({
+        message: "Failed to fetch calendar events",
+        error: error.message || error
+      })
     }
   });
 }
