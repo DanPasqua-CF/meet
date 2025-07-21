@@ -1,6 +1,4 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: danpasquacf
-# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
 app: meet
 service: auth-server
 
@@ -9,6 +7,7 @@ provider:
   runtime: nodejs18.x
   region: us-east-2
   timeout: 30
+
   environment:
     CLIENT_ID: ${file(config.json):CLIENT_ID}
     CLIENT_SECRET: ${file(config.json):CLIENT_SECRET}
@@ -21,15 +20,20 @@ functions:
       - http:
           path: api/get-auth-url
           method: get
+          cors: true
+
   getAccessToken:
     handler: handler.getAccessToken
     events:
       - http:
           path: api/token/{code}
           method: get
+          cors: true
+
   getCalendarEvents:
     handler: handler.getCalendarEvents
     events:
       - http:
           path: api/get-events/{access_token}
           method: get
+          cors: true
