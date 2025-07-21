@@ -45,7 +45,7 @@
       const getAuthUrlButton = document.getElementById("getAuthUrlButton");
       const result = document.getElementById("result");
       const resultLink = document.getElementById("authURL");
-      const getAuthURL = "LAMBDA_GET_AUTH_URL_ENDPOINT"
+      const getAuthURL = "https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url"
 
       getAuthUrlButton.onclick = function() {
         fetch(getAuthURL)
