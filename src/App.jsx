@@ -6,7 +6,6 @@ import CitySearch from './components/CitySearch';
 import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
 
-
 const App = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentNumberOfEvents, setCurrentNumberOfEvents] = useState(32);
