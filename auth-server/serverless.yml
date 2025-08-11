@@ -1,5 +1,5 @@
-org: danpasquacf
-app: meet
+org: danpasquacf2
+app: meet-app
 service: auth-server
 
 provider:
