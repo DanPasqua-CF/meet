@@ -7,52 +7,47 @@ import mockData from "../mock-data";
 
 describe("<Event /> component", () => {
   let event;
-  let getByText, queryByText, getByRole;
 
   beforeEach(() => {
     event = { ...mockData[0], title: mockData[0].summary };
-    ({ getByText, queryByText, getByRole } = render(<Event event={event} />));
+    render(<Event event={event} />);
   });
 
   test("renders the event title", () => {
-    expect(getByText(event.title)).toBeInTheDocument();
+    expect(screen.getByText(event.title)).toBeInTheDocument();
   });
 
-  test("renders the event location", async () => {
-    render(<Event event={event} />);
-
-    const showDetailsButton = screen.getAllByText(/show details/i)[0];
-    await userEvent.click(showDetailsButton);
-
-    expect(screen.getByText(/London, UK/i)).toBeInTheDocument();
+  test("renders the event location", () => {
+    expect(screen.getByText(event.location)).toBeInTheDocument();
   });
 
   test("renders the 'Show Details' button", () => {
-    expect(screen.getAllByText(/show details/i)[0]).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /show details/i })).toBeInTheDocument();
   });
 
   test("hides details by default", () => {
-    expect(queryByText(event.description)).not.toBeInTheDocument();
+    expect(screen.queryByText(/have you wondered how you can ask google/i)).not.toBeInTheDocument();
   });
 
   test("shows details when 'Show Details' is clicked", async () => {
-    const { container, getAllByText } = render(<Event event={event} />);
     const user = userEvent.setup();
+    const showDetailsBtn = screen.getByRole("button", { name: /show details/i });
+    await user.click(showDetailsBtn);
 
-    const buttons = getAllByText(/show details/i);
-    await user.click(buttons[0]); // pick the first one
-
-    const details = await screen.findByText((content, element) => {
-      return element.tagName.toLowerCase() === 'strong' && content.includes('Location:');
-    });
-    
-    expect(details).toBeInTheDocument();
+    // Use a partial text match from the description
+    expect(
+      screen.getByText(/have you wondered how you can ask google/i)
+    ).toBeInTheDocument();
   });
 
   test("hides details again when 'Hide Details' is clicked", async () => {
     const user = userEvent.setup();
-    await user.click(getByText("Show Details"));
-    await user.click(getByText("Hide Details"));
-    expect(queryByText(event.description)).not.toBeInTheDocument();
+    const showDetailsBtn = screen.getByRole("button", { name: /show details/i });
+    await user.click(showDetailsBtn);
+
+    const hideDetailsBtn = screen.getByRole("button", { name: /hide details/i });
+    await user.click(hideDetailsBtn);
+
+    expect(screen.queryByText(/have you wondered how you can ask google/i)).not.toBeInTheDocument();
   });
 });
