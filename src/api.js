@@ -23,7 +23,7 @@ export const getEvents = async () => {
 	if (token) {
 		removeQuery();
 		const url =
-			`https://306ud8php6.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${token}`;
+			`https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
 		const response = await fetch(url);
 		const result = await response.json();
 		if (result) {
@@ -46,7 +46,7 @@ export const getAccessToken = async () => {
 		const code = await searchParams.get("code");
 		if (!code) {
 			const response = await fetch(
-				"https://306ud8php6.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url"
+				"https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url"
 			);
 			const result = await response.json();
 			const { authUrl } = result;
@@ -77,7 +77,7 @@ const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
 
-    const response = await fetch( 'YOUR_GET_ACCESS_TOKEN_ENDPOINT' + '/' + encodeCode);
+    const response = await fetch(`https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/token/${encodeCode}`);
    
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
