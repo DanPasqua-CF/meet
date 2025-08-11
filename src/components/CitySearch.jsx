@@ -6,8 +6,8 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    setSuggestions(allLocations);
-  }, [`${allLocations}`]);
+    setSuggestions(allLocations || []);
+  }, [allLocations]);
 
   const handleInputChanged = (event) => {
   const value = event.target.value;
