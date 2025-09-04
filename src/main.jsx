@@ -1,23 +1,10 @@
-import * as atatus from "atatus-spa";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
-);
-
-atatus.config('b57fc901dee94403823ef107858d734f').install();
-
-serviceWorkerRegistration.unregister();
-
-reportWebVitals();
-
-atatus.notify(new Error('Test Atatus Setup'));
-
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
