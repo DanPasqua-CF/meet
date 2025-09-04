@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 class Alert extends Component {
  constructor(props) {
@@ -24,9 +24,11 @@ class Alert extends Component {
   }
 
   render() {
+    const { text } = this.props;
+    
     return (
       <div className="Alert">
-        <p style={this.getStyle()}>{this.props.text}</p>
+        {text && <p style={this.getStyle()}>{text}</p>}
       </div>
     );
   }
