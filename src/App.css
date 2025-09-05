@@ -1,7 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+#root {
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
 .App {
-  text-align: center;
-  padding: 2% 5%;
+  text-align: left;
+  max-width: 50rem;
+  min-width: 50rem;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .App * {
@@ -26,7 +35,7 @@ input[type="number"] {
   font-size: 14px;
   line-height: 20px;
   align-self: center;
-  height: 38px;
+  height: 40px;
   margin-bottom: 20px;
 }
 
@@ -34,11 +43,42 @@ input[type="number"] {
   width: 250px;
 }
 
-#city-search {
+.input-group {
   display: flex;
   flex-direction: column;
-  margin: auto;
-  position: relative;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.input-field {
+  width: 250px;
+  height: 40px;
+  font-size: 14px;
+  padding: 8px 6px 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+#city-search {
+  margin: 0;
 }
 
 .suggestions {
@@ -55,7 +95,7 @@ input[type="number"] {
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
-  background-color: #eee;
+  background-color: #333;
   cursor: default;
 }
 

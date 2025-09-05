@@ -38,28 +38,31 @@ const handleItemClicked = (event) => {
 };
 
   return (
-    <div id="city-search">
+    <div id="city-search" className="input-group">
+      <label htmlFor="city-input">Event location:</label>
       <input
+        id="city-input"
         type="text"
-        className="city"
+        className="input-field"
         placeholder="Search for a city"
         value={query}
         onFocus={() => setShowSuggestions(true)}
         onChange={handleInputChanged}
       />
-      {showSuggestions ?
+      {showSuggestions && (
         <ul className="suggestions">
-          {suggestions.map((suggestion) => {
-            return <li onClick={handleItemClicked} key={suggestion}>{suggestion}</li>
-          })}
-          <li key='See all cities' onClick={handleItemClicked}>
+          {suggestions.map((suggestion) => (
+            <li onClick={handleItemClicked} key={suggestion}>
+              {suggestion}
+            </li>
+          ))}
+          <li key="See all cities" onClick={handleItemClicked}>
             <b>See all cities</b>
           </li>
         </ul>
-        : null
-      }
+      )}
     </div>
-  )
+  );
 };
 
 export default CitySearch;
