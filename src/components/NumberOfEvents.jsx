@@ -22,19 +22,19 @@ const NumberOfEvents = ({ numberOfEvents = 32, setNumberOfEvents, setErrorAlert 
   };
 
   return (
-    <div id="number-of-events">
-      <label>Number of Events:
-        <input
-          id="numberOfEventsInput"
-          type="number"
-          value={number || ''}
-          onChange={handleInputChanged}
-          data-testid="numberOfEventsInput"
-          role="spinbutton"
-          min="1"
-          max="32"
-        />
-      </label>
+    <div id="number-of-events" className="input-group">
+      <label htmlFor="numberOfEventsInput">Number of Events:</label>
+      <input
+        id="numberOfEventsInput"
+        type="number"
+        className="input-field"
+        value={number || ''}
+        onChange={handleInputChanged}
+        data-testid="numberOfEventsInput"
+        role="spinbutton"
+        min="1"
+        max="32"
+      />
     </div>
   );
 };

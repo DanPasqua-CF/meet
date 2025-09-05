@@ -4,7 +4,9 @@ const { google } = require('googleapis');
 const calendar = google.calendar({ version: 'v3' });
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events.public.readonly'];
 const { CALENDAR_ID, CLIENT_ID, CLIENT_SECRET } = process.env;
-const redirect_uri = 'https://meet-dgdmf59xb-dans-projects-4b9e2996.vercel.app/';
+const redirect_uris = [
+  "meet-mu.vercel.app"
+];
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
