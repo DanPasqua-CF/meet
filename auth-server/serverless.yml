@@ -38,3 +38,10 @@ functions:
           path: api/get-events/{access_token}
           method: get
           cors: true
+
+provider:
+  logs:
+    restApi:
+      accessLogging: false
+      executionLogging: false
+
