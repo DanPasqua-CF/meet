@@ -37,3 +37,11 @@ functions:
           path: api/get-events/{access_token}
           method: get
           cors: true
+
+resources:
+  Resources:
+    ApiGatewayLogGroup:
+      Type: AWS::Logs::LogGroup
+      DeletionPolicy: Retain
+      Properties:
+        LogGroupName: /aws/api-gateway/${self:service}-${self:provider.stage}
