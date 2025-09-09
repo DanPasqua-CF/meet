@@ -66,25 +66,24 @@ module.exports.getAccessToken = async (event) => {
   }
 };
 
-module.exports.getCalendarEvents = async () => {
+module.exports.getCalendarEvents = async (event) => {
   try {
-    oAuth2Client.setCredentials({
-      access_token: tokenStore.access_token,
-      refresh_token: tokenStore.refresh_token,
-      expiry_date: tokenStore.expiry_date
-    });
+    const accessToken = event.pathParameters?.access_token;
 
-    const now = Date.now();
-    if (tokenStore.expiry_date && now >= tokenStore.expiry_date) {
-      const { credentials } = await oAuth2Client.refreshAccessToken();
-      oAuth2Client.setCredentials(credentials);
-
-      tokenStore = {
-        access_token: credentials.access_token,
-        refresh_token: credentials.refresh_token || tokenStore.refresh_token,
-        expiry_date: credentials.expiry_date
+    if (!accessToken) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify({ message: 'Access token is required' }),
       };
     }
+
+    oAuth2Client.setCredentials({
+      access_token: tokenStore.access_token,
+    });
 
     const response = await calendar.events.list({
       calendarId: CALENDAR_ID,
