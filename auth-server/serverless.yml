@@ -18,7 +18,7 @@ provider:
     restApi:
       accessLogging: false
       executionLogging: false
-      level: OFF
+      level: ERROR
 
 functions:
   getAuthURL:
