@@ -7,7 +7,7 @@ export default defineConfig({
  plugins: [
    react(),
    VitePWA({
-    manifestFilename: "manifest.json",
+    manifestFilename: "manifest.webmanifest",
      manifest: {
        "short_name": "React App",
        "name": "Create React App Sample",
