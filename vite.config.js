@@ -7,6 +7,8 @@ export default defineConfig({
  plugins: [
    react(),
    VitePWA({
+    injectRegister: false,
+    injectManifest: false,
     manifestFilename: "manifest.webmanifest",
      manifest: {
        "short_name": "React App",
