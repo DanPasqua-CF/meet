@@ -80,7 +80,7 @@ module.exports.getCalendarEvents = async (event) => {
         timeMin: new Date().toISOString(),
         singleEvents: true,
         orderBy: "startTime",
-        maxResults: 2
+        maxResults: 50
       },
       (error, response) => {
         if (error) {
@@ -106,7 +106,7 @@ module.exports.getCalendarEvents = async (event) => {
   })
   .catch((error) => {
     console.error('Fetch calendar error:', error);
-    
+
     return {
       statusCode: 500,
       headers: {
