@@ -8,10 +8,9 @@ export const extractLocations = (events) => {
 };
 
 const checkToken = async (accessToken) => {
- const response = await fetch(
-   `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
- );
+ const response = await fetch(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`);
  const result = await response.json();
+
  return result;
 };
 
@@ -19,18 +18,30 @@ export const getEvents = async () => {
   NProgress.start();
 
 	if (window.location.href.startsWith("http://localhost")) {
-    NProgress.done();
-		return mockData;
+    return mockData;
 	}
+
+  if (!navigator.onLine) {
+    const events = localStorage.getItem("lastEvents");
+
+    NProgress.done();
+    
+    return events?JSON.parse(events) : [];
+  }
+
 	const token = await getAccessToken();
 
 	if (token) {
 		removeQuery();
-		const url =
-			`https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
+
+		const url = `https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
 		const response = await fetch(url);
 		const result = await response.json();
-		if (result) {
+		
+    if (result) {
+      NProgress.done();
+      localStorage.setItem("lastEvents", JSON.stringify(result.events));
+
 			return result.events;
 		} 
     else {
@@ -41,19 +52,21 @@ export const getEvents = async () => {
 
 export const getAccessToken = async () => {
 	const accessToken = localStorage.getItem("access_token");
-
 	const tokenCheck = accessToken && (await checkToken(accessToken));
 
 	if (!accessToken || tokenCheck.error) {
 		await localStorage.removeItem("access_token");
+
 		const searchParams = new URLSearchParams(window.location.search);
 		const code = await searchParams.get("code");
+
 		if (!code) {
 			const response = await fetch(
 				"https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-auth-url"
 			);
 			const result = await response.json();
 			const { authUrl } = result;
+
 			return (window.location.href = authUrl);
 		}
 		return code && getToken(code);
@@ -63,6 +76,7 @@ export const getAccessToken = async () => {
 
 const removeQuery = () => {
   let newurl;
+  
   if (window.history.pushState && window.location.pathname) {
     newurl =
       window.location.protocol +
@@ -80,7 +94,6 @@ const removeQuery = () => {
 const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
-
     const response = await fetch(`https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/token/${encodeCode}`);
    
     if (!response.ok) {
