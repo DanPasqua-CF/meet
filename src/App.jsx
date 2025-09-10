@@ -16,6 +16,12 @@ const App = () => {
   const [errorAlert, setErrorAlert] = useState("");
 
   useEffect(() => {
+    if (navigator.onLine) {
+      console.log("");
+    } else {
+      console.log("You are using the Meet app offline");
+    }
+
     fetchData();
   }, [currentCity, currentNumberOfEvents]);
 
