@@ -1,7 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+#root {
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
 .App {
-  text-align: center;
-  padding: 2% 5%;
+  text-align: left;
+  max-width: 50rem;
+  min-width: 50rem;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .App * {
@@ -19,26 +28,57 @@ p {
 
 input[type="text"],
 input[type="number"] {
-  padding: 8px 6px 8px 10px;
+  padding: 10px 12px;
   border-radius: 4px;
   outline: none;
   border: 1px solid #ccc;
   font-size: 14px;
   line-height: 20px;
   align-self: center;
-  height: 38px;
   margin-bottom: 20px;
+  min-width: 250px;
 }
 
 .city {
-  width: 250px;
+  min-width: 250px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.input-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.input-field {
+  min-width: 250px;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 0;
 }
 
 #city-search {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  position: relative;
+  margin: 0;
 }
 
 .suggestions {
@@ -55,7 +95,7 @@ input[type="number"] {
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
-  background-color: #eee;
+  background-color: #333;
   cursor: default;
 }
 
@@ -65,7 +105,8 @@ input[type="number"] {
 }
 
 .suggestions > li:hover {
-  background-color: #bcdcdb;
+  background-color: #ccc;
+  color: #333;
 }
 
 .event {
