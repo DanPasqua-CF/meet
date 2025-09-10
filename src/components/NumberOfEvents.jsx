@@ -22,11 +22,13 @@ const NumberOfEvents = ({ numberOfEvents = 32, setNumberOfEvents, setErrorAlert 
   };
 
   return (
-    <div id="number-of-events">
-      <label>Number of Events:
+    <div id="number-of-events" className="input-group">
+      <div className="input-row">
+        <label htmlFor="numberOfEventsInput">Number of Events:</label>
         <input
           id="numberOfEventsInput"
           type="number"
+          className="input-field"
           value={number || ''}
           onChange={handleInputChanged}
           data-testid="numberOfEventsInput"
@@ -34,7 +36,7 @@ const NumberOfEvents = ({ numberOfEvents = 32, setNumberOfEvents, setErrorAlert 
           min="1"
           max="32"
         />
-      </label>
+      </div>
     </div>
   );
 };

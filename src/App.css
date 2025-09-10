@@ -35,8 +35,8 @@ input[type="number"] {
   font-size: 14px;
   line-height: 20px;
   align-self: center;
-  margin-bottom: 20px;
   min-width: 250px;
+  margin-bottom: 0;
 }
 
 .city {
@@ -46,26 +46,35 @@ input[type="number"] {
 .input-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-bottom: 20px;
   font-family: 'Roboto', sans-serif;
 }
 
-.input-group label {
-  margin-bottom: 6px;
+.input-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-row label {
+  min-width: 130px;
+  margin-bottom: 0;
   font-size: 14px;
   font-weight: 500;
   color: #ccc;
+  display: flex;
+  align-items: center;
+  height: 36px;
 }
 
-.input-field {
+.input-row .input-field {
+  flex: none;
+  margin-bottom: 0;
   min-width: 250px;
-  font-size: 14px;
+  height: 36px;
   padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  outline: none;
-  margin: 0;
   box-sizing: border-box;
 }
 
@@ -79,6 +88,7 @@ input[type="number"] {
 
 #city-search {
   margin: 0;
+  position: relative;
 }
 
 .suggestions {
@@ -132,6 +142,6 @@ input[type="number"] {
   position: fixed;
   top: 0px;
   left: 20px;
-  width: 275px;
+  width: 250px;
   z-index: 1000;
 }
