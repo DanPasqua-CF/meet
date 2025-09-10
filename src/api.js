@@ -27,7 +27,7 @@ export const getEvents = async () => {
 
     NProgress.done();
     
-    return events?JSON.parse(events) : [];
+    return events ? JSON.parse(events) : [];
   }
 
 	const token = await getAccessToken();
@@ -38,16 +38,18 @@ export const getEvents = async () => {
 		const url = `https://cdpyevabd1.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
 		const response = await fetch(url);
 		const result = await response.json();
+
+    console.log('API result:', result);
 		
-    if (result) {
+    if (result && result.events) {
       NProgress.done();
       localStorage.setItem("lastEvents", JSON.stringify(result.events));
-
 			return result.events;
 		} 
     else {
-      return null
-    };
+      console.warn('No events in result:', result);
+      return [];
+    }
 	}
 };
 
