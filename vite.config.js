@@ -8,6 +8,9 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         "short_name": "React App",
         "name": "Create React App Sample",
