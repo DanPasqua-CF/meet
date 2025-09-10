@@ -41,7 +41,7 @@ export const getEvents = async () => {
 		
     if (result) {
       NProgress.done();
-      localStorage.setItem("lastEvents", JSON.stringify(result.events));
+      localStorage.setItem("lastEvents", JSON.stringify(result));
 
 			return result;
 		} 
