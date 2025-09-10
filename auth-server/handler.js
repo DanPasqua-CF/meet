@@ -84,6 +84,7 @@ module.exports.getCalendarEvents = async (event) => {
       },
       (error, response) => {
         if (error) {
+          console.error('Calendar API error:', error);
           reject(error);
         }
         return resolve(response)
@@ -91,16 +92,21 @@ module.exports.getCalendarEvents = async (event) => {
     );
   })
   .then((results) => {
+    const events = results.data.items || [];
+    console.log('Fetched events:', events.length);
+    
     return {
       statusCode: 200,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true
       },
-      body: JSON.stringify(results)
+      body: JSON.stringify({ events })
     };
   })
   .catch((error) => {
+    console.error('Fetch calendar error:', error);
+    
     return {
       statusCode: 500,
       headers: {
