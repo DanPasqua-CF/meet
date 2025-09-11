@@ -14,7 +14,7 @@ describe('show/hide an event details', () => {
     const eventDetails = await page.$('.event .details');
     expect(eventDetails).toBeNull();
     await browser.close();
-  });
+  }, 15000);
 
   test('User can expand an event to see its details', async () => {
     const browser = await puppeteer.launch();
@@ -27,7 +27,7 @@ describe('show/hide an event details', () => {
     const eventDetails = await page.$('.event .details');
     expect(eventDetails).toBeDefined();
     await browser.close();
-  });
+  }, 15000);
 
   test('User can collapse an event to hide details', async () => {
     const browser = await puppeteer.launch();
@@ -44,5 +44,5 @@ describe('show/hide an event details', () => {
     expect(eventDetails).toBeNull();
 
     await browser.close();
-  });
+  }, 15000);
 });

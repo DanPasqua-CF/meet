@@ -12,17 +12,21 @@ const CityEventsChart = ({ allLocations, events }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    console.log("allLocations:", allLocations);
+    console.log("events:", events);
+
     setData(getData());
   }, [allLocations, events]);
 
 
   const getData = () => {
-    const data = allLocations.map((location) => {
-      const count = events.filter((event) => event.location === location).length
-      const city = location.split((/, | - /))[0]
+    if (!Array.isArray(allLocations) || !Array.isArray(events)) return [];
+
+    return allLocations.map((location) => {
+      const count = events.filter((event) => event.location === location).length;
+      const city = location.split(/, | - /)[0];
       return { city, count };
-    })
-    return data;
+    });
   };
 
   return (
