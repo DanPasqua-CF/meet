@@ -153,45 +153,11 @@ input[type="number"] {
   align-items: flex-start;
   gap: 20px;
   flex-wrap: wrap;
-  margin: 20px auto;
+  margin: 20px 0;
 }
 
 .chart {
   flex: 1 1 45%;
   min-width: 400px;
   max-width: 600px;
-}
-
-.chart-title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: -20px;
-  font-weight: 500;
-  width: 100%;
-  display: block;
-}
-
-.custom-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  justify-content: center;
-  margin-top: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.custom-legend li {
-  display: flex;
-  align-items: center;
-}
-
-.legend-color {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-right: 6px;
-  border-radius: 2px;
 }
