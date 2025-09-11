@@ -153,5 +153,5 @@ input[type="number"] {
   padding: 20px 0;
   display: flex;
   justify-content: center;
-  border: 1px dashed red;
+  grid-template-columns: 1fr 1fr
 }
