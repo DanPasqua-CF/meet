@@ -1,68 +1,59 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import React, { useEffect, useState } from "react";
+import { Cell, PieChart, Pie, ResponsiveContainer, Tooltip } from "recharts";
 
-const EventGenresChart = ({events}) => {
+const EventGenresChart = ({ events }) => {
   const [data, setData] = useState([]);
-  const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
-  const colors = ['#DD0000', '#00DD00', '#0000DD', '#DDDD00', '#DD00DD'];
+  const genres = ["React", "JavaScript", "Node", "jQuery", "Angular"];
+  const colors = ["#DD0000", "#00DD00", "#0000DD", "#DDDD00", "#DD00DD"];
 
   useEffect(() => {
     setData(getData());
-  }, [`${events}`]);
+  }, [events]);
 
   const getData = () => {
-    const data = genres.map((genre) => {
-      const filteredEvents = events.filter((event) =>
-        event.summary.includes(genre)
-      );
-      
-      return { 
-        name: genre, 
-        value: filteredEvents.length 
+    const total = events.length;
+    
+    return genres.map((genre) => {
+      const count = events.filter((event) => event.summary.includes(genre)).length;
+
+      return {
+        name: genre,
+        value: count,
+        percent: total > 0 ? ((count / total) * 100).toFixed(1) : 0,
       };
     });
-    
-    return data;
-  };
-
-  const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index }) => {
-    const RADIAN = Math.PI / 180;
-    const radius = outerRadius;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.10;
-    const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.10;
-   
-    return percent ? (
-      <text
-        x={x}
-        y={y}
-        fill="#8884d8"
-        textAnchor={x > cx ? 'start' : 'end'}
-        dominantBaseline="central"
-      >
-        {`${genres[index]} ${(percent * 100).toFixed(0)}%`}
-      </text>
-    ) : null;
   };
 
   return (
-    <div style={{ width: '100%', height: 400 }}>
-      <p style={{ textAlign: 'center', marginBottom: '-10px' }}>Topic Distribution</p>
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="chart">
+      <p className="chart-title">Topic Distribution</p>
+      <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie
             data={data}
             dataKey="value"
-            label={renderCustomizedLabel}
-            outerRadius={120}
+            outerRadius={100}
+            label={false}
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index]} />
             ))}
           </Pie>
-          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-          <Legend verticalAlign="bottom" height={70} />
+          <Tooltip />
         </PieChart>
       </ResponsiveContainer>
+
+      <ul className="custom-legend">
+        {data.map((entry, index) => (
+          <li key={entry.name}>
+            <span
+              className="legend-color"
+              style={{ backgroundColor: colors[index] }}
+            ></span>
+            {entry.name} ({entry.percent}%)
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
