@@ -54,6 +54,7 @@ input[type="number"] {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 10px;
 }
@@ -144,4 +145,13 @@ input[type="number"] {
   left: 20px;
   width: 250px;
   z-index: 1000;
+}
+
+.chart-container {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  border: 1px dashed red;
 }
