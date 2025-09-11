@@ -7,8 +7,8 @@
 
 .App {
   text-align: left;
-  max-width: 50rem;
-  min-width: 50rem;
+  max-width: 60rem;
+  min-width: 60rem;
   margin: 0 auto;
   padding: 20px;
 }
@@ -158,8 +158,6 @@ input[type="number"] {
 
 .chart {
   flex: 1 1 45%;
-  min-width: 300px;
-  max-width: 500px;
+  min-width: 400px;
+  max-width: 600px;
 }
-
-
