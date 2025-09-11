@@ -28,8 +28,8 @@ const EventGenresChart = ({events}) => {
   const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, percent, index }) => {
     const RADIAN = Math.PI / 180;
     const radius = outerRadius;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.07;
-    const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.07;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.10;
+    const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.10;
    
     return percent ? (
       <text
@@ -45,23 +45,25 @@ const EventGenresChart = ({events}) => {
   };
 
   return (
-    <ResponsiveContainer width="99%" height={400}>
-      <p>Topic Distribution</p>
-      <PieChart>
-        <Pie
-          data={data}
-          dataKey="value"
-          label={renderCustomizedLabel}
-          outerRadius={130}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index]} />
-          ))}
-        </Pie>
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-        <Legend verticalAlign="bottom" height={0}></Legend>
-      </PieChart>
-    </ResponsiveContainer>
+    <div style={{ width: '100%', height: 400 }}>
+      <p style={{ textAlign: 'center', marginBottom: '-10px' }}>Topic Distribution</p>
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            label={renderCustomizedLabel}
+            outerRadius={120}
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index]} />
+            ))}
+          </Pie>
+          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+          <Legend verticalAlign="bottom" height={70} />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

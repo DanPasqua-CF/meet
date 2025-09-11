@@ -147,11 +147,19 @@ input[type="number"] {
   z-index: 1000;
 }
 
-.chart-container {
-  max-width: 50rem;
-  margin: 0 auto;
-  padding: 20px 0;
+.charts-container {
   display: flex;
   justify-content: center;
-  grid-template-columns: 1fr 1fr
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
 }
+
+.chart {
+  flex: 1 1 45%;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+
